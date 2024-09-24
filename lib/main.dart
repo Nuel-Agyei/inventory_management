@@ -3,7 +3,7 @@ import 'package:inventory_management/dashboard.dart';
 import 'package:provider/provider.dart';
 
 import 'data/db/DB.dart';
-
+ 
 void main() {
   runApp(MultiProvider(
     providers: [

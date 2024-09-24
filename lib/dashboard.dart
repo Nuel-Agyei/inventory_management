@@ -67,8 +67,14 @@ class Dashboard extends StatelessWidget {
                   itemCount: min(snapshot.data.length, 5),
                   itemBuilder: (context, index) {
                     return ListTile(
-                      leading: ImageIcon(snapshot.data[index].image),
-                      title: const Column(),
+                      leading: ImageIcon(snapshot.data[index].image, size: 12,),
+                      title: Column(
+                        children: [
+                          Text(snapshot.data[index].name),
+                          Text(snapshot.data[index].dateOfPurchase),
+                        ],
+                      ),
+                      trailing: Text(snapshot.data[index]),
                     );
                   },
                 );
