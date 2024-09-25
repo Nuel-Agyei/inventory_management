@@ -1,6 +1,7 @@
+import 'dart:io';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:inventory_management/components/add_asset.dart';
 import 'package:provider/provider.dart';
 import 'package:inventory_management/widgets/summary.dart';
@@ -9,8 +10,11 @@ import 'package:inventory_management/data/db/DB.dart';
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
+    final db = Provider.of<DB>(context);
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -63,20 +67,41 @@ class Dashboard extends StatelessWidget {
               } else if (!snapshot.hasData || snapshot.data.isEmpty) {
                 return const Center(child: Text('No data'));
               } else {
-                return ListView.builder(
-                  itemCount: min(snapshot.data.length, 5),
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: ImageIcon(snapshot.data[index].image, size: 12,),
-                      title: Column(
-                        children: [
-                          Text(snapshot.data[index].name),
-                          Text(snapshot.data[index].dateOfPurchase),
-                        ],
-                      ),
-                      trailing: Text(snapshot.data[index]),
-                    );
+                return RefreshIndicator(
+                  onRefresh:(){
+                    throw Exception('Completed');
                   },
+                  child: Expanded(
+                    // This is the fix
+                    child: ListView.builder(
+                      itemCount: min(snapshot.data.length, 5),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onLongPress: () { 
+                            db.deleteAsset(snapshot.data[index].id); 
+                            @override
+                            setState(){};
+                            },
+                          child: ListTile(
+                            leading: snapshot.data[index].image != null
+                                ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Image.file(File(snapshot.data[index].image)))
+                                :const Icon(Icons.image), // Placeholder if no image is provided
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(snapshot.data[index].name),
+                                Text(DateFormat('MM/dd/yyyy')
+                                    .format(snapshot.data[index].dateOfPurchase)),
+                              ],
+                            ),
+                            trailing: Text(snapshot.data[index].total.toString()),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 );
               }
             },

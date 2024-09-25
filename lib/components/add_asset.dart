@@ -213,6 +213,7 @@ class AddAssetState extends State<AddAsset> {
                     ),
                   );
                   print(db.getAllAssets());
+                  Navigator.pop(context);
                 },
                 child: const Text('Save'),
               ),
