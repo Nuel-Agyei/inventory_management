@@ -50,4 +50,5 @@ class DB extends _$DB {
   Future<int> deleteAsset(int id) async {
     return await (delete(asset)..where((tbl) => tbl.id.equals(id))).go();
   }
+  
 }
