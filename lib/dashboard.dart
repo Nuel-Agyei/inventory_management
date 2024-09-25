@@ -91,7 +91,7 @@ class _DashboardState extends State<Dashboard> {
                         onLongPress: () { 
                           db.deleteAsset(snapshot.data[index].id); 
                           @override
-                          setState(){};
+                          setState(){}
                           },
                         child: ListTile(
                           leading: snapshot.data[index].image != null
@@ -120,7 +120,6 @@ class _DashboardState extends State<Dashboard> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print('damn');
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => const AddAsset()));
         },
