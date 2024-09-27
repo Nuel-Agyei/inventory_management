@@ -38,7 +38,6 @@ class _AssetState extends State<Asset> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Display image if available, or a placeholder icon if not
                   asset.image != null
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(15.0),
@@ -56,7 +55,6 @@ class _AssetState extends State<Asset> {
                         ),
                   const SizedBox(height: 20),
 
-                  // Display asset name
                   Text(
                     asset.name,
                     style: const TextStyle(
@@ -66,41 +64,37 @@ class _AssetState extends State<Asset> {
                   ),
                   const SizedBox(height: 10),
 
-                  // Display date of purchase
                   Text(
                     'Date of Purchase: ${DateFormat('MM/dd/yyyy').format(asset.dateOfPurchase)}',
                     style: const TextStyle(fontSize: 18),
                   ),
                   const SizedBox(height: 10),
 
-                  // Display total price
                   Text(
                     'Price: \$${asset.total}',
                     style: const TextStyle(fontSize: 18),
                   ),
                   const SizedBox(height: 10),
 
-                  // Display lifespan
                   Text(
                     'Lifespan: ${asset.lifespan} years',
                     style: const TextStyle(fontSize: 18),
                   ),
                   const SizedBox(height: 10),
 
-                  // Display scrap value
                   Text(
                     'Scrap Value: \$${asset.scrapvalue}',
                     style: const TextStyle(fontSize: 18),
                   ),
                   const SizedBox(height: 10),
 
-                  // Display condition
                   Text(
                     'Condition: ${asset.condition}',
                     style: const TextStyle(fontSize: 18),
                   ),
                 ],
               ),
+              
             );
           }
         },
