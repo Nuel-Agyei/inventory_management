@@ -212,8 +212,12 @@ class AddAssetState extends State<AddAsset> {
                       condition: d.Value(_selectedCondition),
                     ),
                   );
-                  print(db.getAllAssets());
                   Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Asset added successfully'),
+                    ),
+                  );
                 },
                 child: const Text('Save'),
               ),

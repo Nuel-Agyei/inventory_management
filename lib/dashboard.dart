@@ -91,8 +91,10 @@ class _DashboardState extends State<Dashboard> {
                       return GestureDetector(
                         onLongPress: () { 
                           db.deleteAsset(snapshot.data[index].id); 
-                          @override
-                          setState(){}
+                          setState(() {
+                            const SnackBar(content: Text('Asset deleted successfully'));
+                          });
+                         
                           },
                         child: GestureDetector(
                           onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Asset(id: snapshot.data[index].id))),
