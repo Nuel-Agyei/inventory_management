@@ -211,8 +211,7 @@ class AddAssetState extends State<AddAsset> {
                       scrapvalue: d.Value(int.parse(_scrapValueController.text)),
                       condition: d.Value(_selectedCondition),
                     ),
-                  );
-                  Navigator.pop(context);
+                  );                  Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Asset added successfully'),
