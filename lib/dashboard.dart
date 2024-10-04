@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:inventory_management/asset.dart';
 import 'package:inventory_management/components/add_asset.dart';
+import 'package:inventory_management/list_assets.dart';
 import 'package:provider/provider.dart';
 import 'package:inventory_management/widgets/summary.dart';
 import 'package:inventory_management/data/db/DB.dart';
@@ -31,41 +32,68 @@ class _DashboardState extends State<Dashboard> {
             }
             
           ),
+           IconButton(onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ListAssets()));
+                    }, icon:const Icon(Icons.home))
         ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
+          Padding(
+            padding:const EdgeInsets.all(16.0),
             child: Column(
               children: [
                 Column(
                   children: [
                     Row(
                       children: [
-                        Summary(
-                          name: 'Name',
-                          total: 120.5,
-                        ),
-                        Summary(
-                          name: 'Name',
-                          total: 80.4,
-                        )
+                        FutureBuilder(future: db.getAsset(1), builder: (context, snapshot) {
+                          if(snapshot.hasData){
+                          return Summary(
+                          name: snapshot.data!.name,
+                          total: snapshot.data!.total.toDouble(),
+                        );
+                        }else if(snapshot.data == null){return Center(child: Summary(name: 'Empty', total: 0,));}
+                        else{
+                          return const Center(child: CircularProgressIndicator());}
+                      }),
+                        FutureBuilder(future: db.getAsset(2), builder: (context, snapshot) {
+                          if(snapshot.hasData){
+                          return Summary(
+                          name: snapshot.data!.name,
+                          total: snapshot.data!.total.toDouble(),
+                        );
+                        }else{
+                          return const Center(child: CircularProgressIndicator());}
+                      }),
+                       
+                        
                       ],
                     ),
+                   
                   ],
                 ),
                 Row(
                   children: [
-                    Summary(
-                      name: 'Name',
-                      total: 12,
-                    ),
-                    Summary(
-                      name: 'Name',
-                      total: 12,
-                    ),
+                   FutureBuilder(future: db.getAsset(3), builder: (context, snapshot) {
+                          if(snapshot.hasData){
+                          return Summary(
+                          name: snapshot.data!.name,
+                          total: snapshot.data!.total.toDouble(),
+                        );
+                        }else{
+                          return const Center(child: CircularProgressIndicator());}
+                      }),
+                    FutureBuilder(future: db.getAsset(4), builder: (context, snapshot) {
+                          if(snapshot.hasData){
+                          return Summary(
+                          name: snapshot.data!.name,
+                          total: snapshot.data!.total.toDouble(),
+                        );
+                        }else{
+                          return const Center(child: CircularProgressIndicator());}
+                      }),
                   ],
                 ),
               ],
