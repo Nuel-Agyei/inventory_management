@@ -19,7 +19,7 @@ class _ListAssetsState extends State<ListAssets> {
     final db = Provider.of<DB>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('List of assets'),
+        title: const Text('List of assets'),
       ),
       body: Column(
         children: [

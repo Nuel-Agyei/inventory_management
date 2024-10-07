@@ -54,7 +54,7 @@ class _DashboardState extends State<Dashboard> {
                           name: snapshot.data!.name,
                           total: snapshot.data!.total.toDouble(),
                         );
-                        }else if(snapshot.data == null){return Center(child: Summary(name: 'Empty', total: 0,));}
+                        }else if(snapshot.data == null){return const Center(child: Summary(name: 'Empty', total: 0,));}
                         else{
                           return const Center(child: CircularProgressIndicator());}
                       }),
@@ -64,7 +64,8 @@ class _DashboardState extends State<Dashboard> {
                           name: snapshot.data!.name,
                           total: snapshot.data!.total.toDouble(),
                         );
-                        }else{
+                        }else if(snapshot.data == null){return const Center(child: Summary(name: 'Empty', total: 0,));}
+                        else{
                           return const Center(child: CircularProgressIndicator());}
                       }),
                        
@@ -82,7 +83,8 @@ class _DashboardState extends State<Dashboard> {
                           name: snapshot.data!.name,
                           total: snapshot.data!.total.toDouble(),
                         );
-                        }else{
+                        }else if(snapshot.data == null){return const Center(child: Summary(name: 'Empty', total: 0,));}
+                        else{
                           return const Center(child: CircularProgressIndicator());}
                       }),
                     FutureBuilder(future: db.getAsset(4), builder: (context, snapshot) {
@@ -91,7 +93,8 @@ class _DashboardState extends State<Dashboard> {
                           name: snapshot.data!.name,
                           total: snapshot.data!.total.toDouble(),
                         );
-                        }else{
+                        }else if(snapshot.data == null){return const Center(child: Summary(name: 'Empty', total: 0,));}
+                        else{
                           return const Center(child: CircularProgressIndicator());}
                       }),
                   ],
